@@ -18,8 +18,18 @@
     "buildPublish": " vite build && npm version patch && pnpm publish",
     "preview": "vite preview"
   },
+  "keywords": [
+    "sql",
+    "editor",
+    "react",
+    "sql-editor",
+    "react-component",
+    "monaco-editor"
+  ],
+  "description": "基于monaco-editor react 实现的sql编辑器，支持语法高亮、 关联数据库,表名 关键字 功能",
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
+    "magic-string": "^0.30.11",
     "monaco-editor": "^0.50.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

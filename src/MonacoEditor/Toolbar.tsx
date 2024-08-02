@@ -33,7 +33,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({ isFullScreen, toggleFullScreen
         />
       ) : (
         <FullscreenExitOutlined 
-          
           onClick={toggleFullScreen}
           style={{
             height: '20px',

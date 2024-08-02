@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import { readFileSync } from "fs";
@@ -10,8 +11,21 @@ const packageJson = JSON.parse(
 const globals = {
   ...(packageJson?.dependencies || {}),
 };
+//@ts-ignore
+import nlsPlugin, { Languages,esbuildPluginMonacoEditorNls } from './vite-plugins/nls.js'
 
-// https://vitejs.dev/config/
+import zh_hans from './vite-plugins/zh-hans.json'
+
+// 注意只在生产环境下添加rollup插件，开发模式下会报错
+const plugins = [React()]
+if (process.env.NODE_ENV !== 'development') {
+    plugins.push(nlsPlugin({
+        locale: Languages.zh_hans,
+        localeData: zh_hans,
+    }))
+}
+
+
 export default defineConfig({
   build: {
     outDir: "dist",
@@ -40,5 +54,16 @@ export default defineConfig({
       },
     },
   },
-  plugins: [React()],
+   plugins,
+   optimizeDeps: {
+    esbuildOptions: {
+      plugins: [
+        // 开发环境下通过esbuild插件进行汉化
+        esbuildPluginMonacoEditorNls({
+          locale: Languages.zh_hans,
+          localeData: zh_hans,
+        }),
+      ],
+    },
+  },
 });
