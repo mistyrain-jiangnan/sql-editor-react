@@ -6,7 +6,7 @@ import { editor, languages } from 'monaco-editor'
 import codicon from 'monaco-editor/min/vs/base/browser/ui/codicons/codicon/codicon.ttf'
 
 import { sqlAutoComplete, getDBSuggest, getTableSuggest, formatSQL } from './utils'
-
+//@ts-ignore
 import { language as sqlLanguage } from 'monaco-editor/esm/vs/basic-languages/sql/sql.js'
 
 import { defineTheme } from './themo'

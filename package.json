@@ -1,11 +1,11 @@
 {
   "name": "sql-editor-react",
   "private": false,
-  "version": "0.8.6",
+  "version": "0.8.8",
   "type": "module",
-  "main": "./dist/sql-editor.cjs",
-  "module": "./dist/sql-editor.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/sql-editor.cjs",
@@ -15,9 +15,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build ",
+    "build": " vite build ",
+    "stBuild": "tsup ",
     "buildPublish": " pnpm build && npm version patch && pnpm publish",
-    "preview": "vite preview"
+    "stBuildPublish": " pnpm stBuild && npm version patch && pnpm publish",
+    "preview": "vite preview",
+    "clear": "sh ./scripts/clear.sh"
   },
   "keywords": [
     "sql",
@@ -46,7 +49,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "typescript": "^5.2.2",
+    "tsup": "^8.2.3",
+    "typescript": "^5.5.4",
     "vite": "^5.3.4",
     "vite-plugin-dts": "4.0.0-beta.2"
   },

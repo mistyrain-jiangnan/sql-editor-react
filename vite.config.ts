@@ -17,9 +17,7 @@ import nlsPlugin, { Languages,esbuildPluginMonacoEditorNls } from './vite-plugin
 
 import zh_hans from './vite-plugins/zh-hans.json'
 
-const plugins = [React(),dts({
-  tsconfigPath: 'tsconfig.app.json'
-})]
+const plugins = [React(),dts()]
 // 注意只在生产环境下添加rollup插件，开发模式下会报错
 
 if (process.env.NODE_ENV !== 'development') {

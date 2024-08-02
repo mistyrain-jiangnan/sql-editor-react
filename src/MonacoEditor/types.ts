@@ -27,3 +27,8 @@ export interface MonacoEditorProps extends Omit<React.HTMLAttributes<HTMLDivElem
     onChange?: (value: string, event: editor.IModelContentChangedEvent) => void
     children?: ReactNode // 允许传递子组件
   }
+  // Monaco
+  export type Monaco = typeof monaco;
+  
+  // Default themes
+  export type Theme = 'vs-dark' | 'light';

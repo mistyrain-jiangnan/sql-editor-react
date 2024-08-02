@@ -3,7 +3,7 @@ import type { RefEditorInstance } from '../MonacoEditor/types'
 import type { editor } from 'monaco-editor'
 import type { FC } from 'react'
 
-import MonacoEditor from '../MonacoEditor'
+import MonacoEditor from '../MonacoEditor/MonacoEditor'
 import React from 'react'
 
 const App: FC = () => {

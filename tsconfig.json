@@ -2,10 +2,29 @@
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
-    },
-    {
       "path": "./tsconfig.node.json"
-    }
-  ]
+    },
+  ],
+    "compilerOptions": {
+      "baseUrl": ".",
+      "module": "ESNext",
+      "lib": ["ESNext", "dom", "dom.iterable"],
+      "target": "ESNext",
+      "declaration": true,
+      "declarationMap": true,
+      "outDir": "./dist",
+      "strict": true,
+      "skipLibCheck": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "noUncheckedIndexedAccess": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "jsx": "preserve",
+      "esModuleInterop": true,
+      "noEmit": false
+    },
+    "include": ["./src", "tsup.config.ts"]
 }
