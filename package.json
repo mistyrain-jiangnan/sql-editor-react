@@ -5,15 +5,15 @@
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": ".dist/src/index.d.ts",
+  "types": ".dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs",
-      "types": "./dist/src/index.d.ts"
+      "types": "./dist/index.d.ts"
     },
     "./style": "./dist/style.css",
-    "./types": "./dist/src/index.d.ts"
+    "./types": "./dist/index.d.ts"
   },
   "scripts": {
     "dev": "vite",
@@ -33,8 +33,6 @@
   "description": "基于monaco-editor react 实现的sql编辑器，支持语法高亮、 关联数据库,表名 关键字 功能",
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
-    "@rollup/plugin-json": "^6.1.0",
-    "magic-string": "^0.30.11",
     "monaco-editor": "^0.50.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -52,7 +50,8 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "typescript": "^5.5.4",
     "vite": "^5.3.4",
-    "vite-plugin-dts": "4.0.0-beta.2"
+    "vite-plugin-dts": "4.0.0-beta.2",
+    "magic-string": "^0.30.11"
   },
   "peerDependencies": {
     "monaco-editor": ">= 0.25.0 < 1"

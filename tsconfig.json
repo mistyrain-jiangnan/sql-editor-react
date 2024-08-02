@@ -27,7 +27,7 @@
       "allowJs":true
     },
     "include": [
-      "./src","./vite-plugins/"  // 包含 src 目录下的所有文件
+      "./src" // 包含 src 目录下的所有文件
     ],
     "exclude": [
       "./src/example/**/*"  // 排除 src/example 目录下的所有文件

@@ -1,15 +1,22 @@
-# 使用指南
 
-该文档将指导您如何在 React 组件中使用 `MonacoEditor` 组件
+# sql-editor-react
 
-## 1. 导入依赖
+### 安装
 
+```bash
+npm install sql-editor-react
+```
 
-首先，您需要从相关库中导入必要的依赖：
+or
 
-```typescript
+```bash
+yarn add sql-editor-react
+```
+
+### 使用
+
+```javascript
 import { useRef, useState, type FC } from "react";
-
 
 import  MonacoEditor from 'sql-editor-react'
 
@@ -36,3 +43,32 @@ const App: FC = () => {
 };
 
 export default App;
+```
+
+```typescript
+// 引用实例的类型定义
+export interface RefEditorInstance {
+    container: HTMLDivElement | null
+    editor?: editor.IStandaloneCodeEditor
+    monaco: IMonacoEditor
+    format: () => void // 暴露 formatSQL 方法
+    setReadOnly: (value: boolean) => void
+  }
+// 定义组件的属性类型
+export interface MonacoEditorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+    width?: number | string
+    height?: number | string
+    value?: string
+    defaultValue?: string
+    dataBase?: Record<string, string[]> //支持数据库 表名
+    language?: editor.IStandaloneEditorConstructionOptions['language']
+    autoComplete?: (model: editor.ITextModel, position: monaco.Position) => monaco.languages.CompletionItem[]
+    theme?: editor.IStandaloneEditorConstructionOptions['theme']
+    options?: editor.IStandaloneEditorConstructionOptions //继承MonacoEditor options属性
+    editorDidMount?: (editor: editor.IStandaloneCodeEditor, monaco: IMonacoEditor) => void
+    onChange?: (value: string, event: editor.IModelContentChangedEvent) => void
+    children?: ReactNode  //传递过来的Toolbar 组件 默认支持全屏
+  }
+ export type Monaco = typeof monaco;
+ export type Theme = 'vs-dark' | 'light';
+```
