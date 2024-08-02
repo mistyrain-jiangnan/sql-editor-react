@@ -34,7 +34,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "./src/index.ts"),
       name: "sql-editor",
-      fileName: "sql-editor",
+      fileName: "index",
       // 打包格式
       formats: ["es", "cjs"],
     },

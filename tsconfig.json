@@ -6,7 +6,6 @@
     },
   ],
     "compilerOptions": {
-      "baseUrl": ".",
       "module": "ESNext",
       "lib": ["ESNext", "dom", "dom.iterable"],
       "target": "ESNext",
@@ -26,5 +25,10 @@
       "esModuleInterop": true,
       "noEmit": false
     },
-    "include": ["./src", "tsup.config.ts"]
+    "include": [
+      "./src/**/*"  // 包含 src 目录下的所有文件
+    ],
+    "exclude": [
+      "./src/example/**/*"  // 排除 src/example 目录下的所有文件
+    ]
 }

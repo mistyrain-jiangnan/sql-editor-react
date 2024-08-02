@@ -1,18 +1,11 @@
 {
   "name": "sql-editor-react",
   "private": false,
-  "version": "0.8.9",
+  "version": "0.8.10",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.cjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/sql-editor.cjs",
-      "import": "./dist/sql-editor.js"
-    },
-    "./style": "./dist/style.css"
-  },
+  "main": "dist/index.js",
+  "module": "dist/index.cjs",
+  "types": ".dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": " vite build ",
