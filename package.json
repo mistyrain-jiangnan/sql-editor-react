@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "buildPublish":" vite build && pnpm publish",
+    "buildPublish":" vite build && npm version patch && pnpm publish",
     "preview": "vite preview"
   },
   "dependencies": {
