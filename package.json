@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "vite",
     "build": " vite build ",
-    "buildPublish": " vite build && npm version patch && npm publish",
+    "buildPublish": " vite build && pnpm version patch && pnpm publish",
     "preview": "vite preview",
     "clear": "sh ./scripts/clear.sh"
   },
