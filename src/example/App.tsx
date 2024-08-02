@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react'
-import type { RefEditorInstance } from '../MonacoEditor'
+import type { RefEditorInstance } from '../MonacoEditor/types'
 import type { editor } from 'monaco-editor'
 import type { FC } from 'react'
 
 import MonacoEditor from '../MonacoEditor'
+import React from 'react'
 
 const App: FC = () => {
   const editorRef = useRef<RefEditorInstance>(null)

@@ -4,6 +4,7 @@ import { resolve } from "path";
 import { readFileSync } from "fs";
 
 import React from "@vitejs/plugin-react";
+import dts from 'vite-plugin-dts';
 
 const packageJson = JSON.parse(
   readFileSync("./package.json", { encoding: "utf-8" })
@@ -16,8 +17,11 @@ import nlsPlugin, { Languages,esbuildPluginMonacoEditorNls } from './vite-plugin
 
 import zh_hans from './vite-plugins/zh-hans.json'
 
+const plugins = [React(),dts({
+  tsconfigPath: 'tsconfig.app.json'
+})]
 // 注意只在生产环境下添加rollup插件，开发模式下会报错
-const plugins = [React()]
+
 if (process.env.NODE_ENV !== 'development') {
     plugins.push(nlsPlugin({
         locale: Languages.zh_hans,

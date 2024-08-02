@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./dist/sql-editor.cjs",
   "module": "./dist/sql-editor.js",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/sql-editor.cjs",
@@ -14,8 +15,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "buildPublish": " vite build && npm version patch && pnpm publish",
+    "build": "vite build ",
+    "buildPublish": " pnpm build && npm version patch && pnpm publish",
     "preview": "vite preview"
   },
   "keywords": [
@@ -46,7 +47,8 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "typescript": "^5.2.2",
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "vite-plugin-dts": "4.0.0-beta.2"
   },
   "files": [
     "dist"

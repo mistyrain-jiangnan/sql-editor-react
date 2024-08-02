@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useImperativeHandle, useEffect, useRef, useState, useCallback } from 'react'
 import * as monaco from 'monaco-editor'
 import { editor, languages } from 'monaco-editor'
@@ -7,34 +8,21 @@ import codicon from 'monaco-editor/min/vs/base/browser/ui/codicons/codicon/codic
 import { sqlAutoComplete, getDBSuggest, getTableSuggest, formatSQL } from './utils'
 
 import { language as sqlLanguage } from 'monaco-editor/esm/vs/basic-languages/sql/sql.js'
+
 import { defineTheme } from './themo'
 import { Toolbar } from './Toolbar' 
 
-import type { ReactNode } from 'react'
-import type { Position, IDisposable } from 'monaco-editor'
+import type {  IDisposable } from 'monaco-editor'
+import {  MonacoEditorProps, RefEditorInstance } from './types'
 
 const { keywords } = sqlLanguage
 
 // 空函数，用作默认值
 function noop() {}
 
-export type IMonacoEditor = typeof monaco
 
-// 定义组件的属性类型
-export interface MonacoEditorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  width?: number | string
-  height?: number | string
-  value?: string
-  defaultValue?: string
-  dataBase?: Record<string, string[]>
-  language?: editor.IStandaloneEditorConstructionOptions['language']
-  autoComplete?: (model: editor.ITextModel, position: Position) => languages.CompletionItem[]
-  theme?: editor.IStandaloneEditorConstructionOptions['theme']
-  options?: editor.IStandaloneEditorConstructionOptions
-  editorDidMount?: (editor: editor.IStandaloneCodeEditor, monaco: IMonacoEditor) => void
-  onChange?: (value: string, event: editor.IModelContentChangedEvent) => void
-  children?: ReactNode // 允许传递子组件
-}
+
+
 
 // 加载字体的异步函数
 export async function loadFont(fontFamily: string, url: string): Promise<void> {
@@ -56,14 +44,7 @@ const defaultOptions: editor.IStandaloneEditorConstructionOptions & editor.IEdit
     enabled: false, // 禁用小地图
   },
 }
-// 引用实例的类型定义
-export interface RefEditorInstance {
-  container: HTMLDivElement | null
-  editor?: editor.IStandaloneCodeEditor
-  monaco: IMonacoEditor
-  format: () => void // 暴露 formatSQL 方法
-  setReadOnly: (value: boolean) => void
-}
+
 
 // eslint-disable-next-line react-refresh/only-export-components
 function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEditorInstance>) {
@@ -165,6 +146,7 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
         window.removeEventListener('keyup', handleKeyUp)
       }
     }
+    return undefined;
   }, [handleExitFullEdit, isFullScreen])
   // 组件卸载时销毁编辑器实例
   useEffect(() => {
@@ -200,7 +182,7 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
             const editingWord = tokens[tokens.length - 1]
 
             /* .结尾 */
-            if (editingWord.endsWith('.')) {
+            if (editingWord?.endsWith('.')) {
               const wordNoDot = editingWord.slice(0, editingWord.length - 1)
               if (Object.keys(dataBase).includes(wordNoDot)) {
                 suggestions = [...getTableSuggest(dataBase, wordNoDot)]
