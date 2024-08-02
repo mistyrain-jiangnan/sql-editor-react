@@ -1,17 +1,24 @@
 {
   "name": "sql-editor-react",
   "private": false,
-  "version": "0.8.11",
+  "version": "0.8.16",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.cjs",
-  "types": ".dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": ".dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./style": "./dist/style.css",
+    "./types": "./dist/src/index.d.ts"
+  },
   "scripts": {
     "dev": "vite",
     "build": " vite build ",
-    "stBuild": "tsup ",
-    "buildPublish": " pnpm build && npm version patch && pnpm publish",
-    "stBuildPublish": " pnpm stBuild && npm version patch && pnpm publish",
+    "buildPublish": " vite build && npm version patch && npm publish",
     "preview": "vite preview",
     "clear": "sh ./scripts/clear.sh"
   },
@@ -26,6 +33,7 @@
   "description": "基于monaco-editor react 实现的sql编辑器，支持语法高亮、 关联数据库,表名 关键字 功能",
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
+    "@rollup/plugin-json": "^6.1.0",
     "magic-string": "^0.30.11",
     "monaco-editor": "^0.50.0",
     "react": "^18.3.1",
@@ -42,10 +50,12 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "tsup": "^8.2.3",
     "typescript": "^5.5.4",
     "vite": "^5.3.4",
     "vite-plugin-dts": "4.0.0-beta.2"
+  },
+  "peerDependencies": {
+    "monaco-editor": ">= 0.25.0 < 1"
   },
   "files": [
     "dist"

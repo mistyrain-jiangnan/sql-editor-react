@@ -14,7 +14,7 @@ const App: FC = () => {
     selectOnLineNumbers: true,
     roundedSelection: false,
     cursorStyle: 'line',
-    automaticLayout: false,
+    automaticLayout: true,
   }
   const handleEditorChange = (newValue: string) => {
     setCode(newValue)
@@ -32,7 +32,6 @@ const App: FC = () => {
       <button onClick={handleFormatSQL}>格式化 SQL</button> {/* 按钮触发格式化 */}
       <MonacoEditor
         ref={editorRef}
-        width={1000}
         height={800}
         value={code}
         theme="naruto"

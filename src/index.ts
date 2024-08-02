@@ -1,4 +1,4 @@
-import MonacoEditor from './MonacoEditor/index'
+import { default as MonacoEditor } from './MonacoEditor/index'
 
 export * from './MonacoEditor/types';
 // 具名导出：

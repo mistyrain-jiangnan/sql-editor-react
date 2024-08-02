@@ -17,9 +17,9 @@ import nlsPlugin, { Languages,esbuildPluginMonacoEditorNls } from './vite-plugin
 
 import zh_hans from './vite-plugins/zh-hans.json'
 
-const plugins = [React(),dts()]
-// 注意只在生产环境下添加rollup插件，开发模式下会报错
+const plugins = [React(),dts({insertTypesEntry: true})]
 
+// 注意只在生产环境下添加rollup插件，开发模式下会报错
 if (process.env.NODE_ENV !== 'development') {
     plugins.push(nlsPlugin({
         locale: Languages.zh_hans,
@@ -27,25 +27,25 @@ if (process.env.NODE_ENV !== 'development') {
     }))
 }
 
-
 export default defineConfig({
   build: {
     outDir: "dist",
     lib: {
       entry: resolve(__dirname, "./src/index.ts"),
       name: "sql-editor",
-      fileName: "index",
       // 打包格式
       formats: ["es", "cjs"],
+      fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.cjs')
     },
     rollupOptions: {
-      external: ["react", "react-dom", ...Object.keys(globals)],
+      external: ["react", "react-dom",...Object.keys(globals)],
       output: {
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
         },
+         exports: 'named',
         manualChunks: (id) => {
           if (id.includes("node_modules")) {
             // 将所有 node_modules 模块打包到一个 chunk 中

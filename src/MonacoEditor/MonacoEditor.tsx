@@ -39,6 +39,7 @@ const defaultOptions: editor.IStandaloneEditorConstructionOptions & editor.IEdit
   cursorStyle: 'line',
   readOnly: true,
   fontSize: 16,
+  automaticLayout: true,
   minimap: {
     // 小地图配置
     enabled: false, // 禁用小地图
@@ -130,19 +131,14 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
   useEffect(() => {
     const editorInstance = $editor.current
     if (editorInstance) {
-      const handleResize = () => {
-        editorInstance.layout()
-      }
       const handleKeyUp = (event: KeyboardEvent) => {
         if (isFullScreen) {
           handleExitFullEdit(event)
         }
       }
       editorInstance.layout()
-      window.addEventListener('resize', handleResize)
       window.addEventListener('keyup', handleKeyUp)
       return () => {
-        window.removeEventListener('keyup', handleKeyUp)
         window.removeEventListener('keyup', handleKeyUp)
       }
     }
