@@ -1,0 +1,43 @@
+{
+  "name": "sql-editor-react",
+  "private": false,
+  "version": "0.5.0",
+  "type": "module",
+  "main": "./dist/sql-editor.cjs",
+  "module": "./dist/sql-editor.js",
+  "exports": {
+    ".": {
+      "require": "./dist/sql-editor.cjs",
+      "import": "./dist/sql-editor.js"
+    },
+    "./style": "./dist/style.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.4.0",
+    "monaco-editor": "^0.50.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sql-formatter": "^15.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4"
+  },
+  "files": [
+    "dist"
+  ]
+}

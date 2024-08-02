@@ -1,0 +1,15 @@
+.toolbar{
+    background-color: #F5F6F7;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding-right: 1rem; 
+    cursor: pointer;
+  }
+  
+  .fullscreen {
+    width: 100vw;
+    height: 0;
+  }
+  
+  
