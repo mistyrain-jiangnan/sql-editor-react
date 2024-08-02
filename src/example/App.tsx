@@ -32,7 +32,7 @@ const App: FC = () => {
       <button onClick={handleFormatSQL}>格式化 SQL</button> {/* 按钮触发格式化 */}
       <MonacoEditor
         ref={editorRef}
-        height={800}
+        height={400}
         value={code}
         theme="naruto"
         options={options}
