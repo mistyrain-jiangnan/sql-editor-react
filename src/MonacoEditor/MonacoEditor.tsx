@@ -84,12 +84,13 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
   //动态引入
   useEffect(() => {
     const loadMonaco = async () => {
-      const monacoEditor = (await import('monaco-editor')).editor;
-      setMonacoEditor(monacoEditor);
+      const monacoModule  = (await import('monaco-editor')).editor;
+      console.log("🚀 ~ loadMonaco ~ monacoModule:", monacoModule)
+      setMonacoEditor(monacoModule);
     };
     loadMonaco();
   }, []);
-  
+
   // 定义 format 方法
   const format = () => {
     if ($editor.current) {
@@ -227,7 +228,7 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
 
   // 初始化编辑器实例
   const refElement = useCallback((node: HTMLDivElement) => {
-    if (node !== null &&!monacoEditor) {
+    if (node !== null && monacoEditor) {
       container.current = node
       $editor.current = editor.create(node, {
         value: val,
@@ -259,7 +260,7 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
         }
       })
     }
-  }, [])
+  }, [monacoEditor])
 
   return (
     <div
