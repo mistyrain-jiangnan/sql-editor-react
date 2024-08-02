@@ -85,7 +85,6 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
       $editor.current.setValue(formatSQL($editor.current.getValue()))
     }
   }
-
   const setReadOnly = (readOnly: boolean) => {
     if ($editor.current) {
       $editor.current.updateOptions({ readOnly })
