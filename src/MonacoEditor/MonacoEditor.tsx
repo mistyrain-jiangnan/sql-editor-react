@@ -5,7 +5,7 @@ import { editor, languages } from 'monaco-editor'
 // 导入 codicon 字体
 import codicon from 'monaco-editor/min/vs/base/browser/ui/codicons/codicon/codicon.ttf'
 
-import { sqlAutoComplete, getDBSuggest, getTableSuggest, formatSQL, findSQLErrors, handleErrorMark } from './utils'
+import { sqlAutoComplete, getDBSuggest, getTableSuggest, formatSQL} from './utils'
 //@ts-ignore
 import { language as sqlLanguage } from 'monaco-editor/esm/vs/basic-languages/sql/sql.js'
 
@@ -82,7 +82,6 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false)
 
   const [monacoEditor, setMonacoEditor] = useState<unknown>(null);
-  const [decorations, setDecorations] = useState<string[]>([]);
   //动态引入
   useEffect(() => {
     const loadMonaco = async () => {
@@ -130,26 +129,7 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
   // 当 value 变化时更新状态
   useEffect(() => {
     setVal(value)
-    if ($editor.current) {
-      const editorInstance = $editor.current;
-      const handleModelChange = () => {
-        const model = editorInstance.getModel();
-        if (model) {
-          const code = model.getValue();
-          const errors = findSQLErrors(code);
-          //解析器没有正确的识别到全部的数据
-          const newDecorations = handleErrorMark(editorInstance, decorations, errors);
-          setDecorations(newDecorations);
-        }
-      };
-      const disposable = editorInstance.onDidChangeModelContent(handleModelChange);
-      return () => {
-        disposable.dispose();
-      };
-    }else {
-      return undefined
-    }
-  }, [decorations, value])
+  }, [ value])
 
   // 当 val 变化时更新编辑器内容  当主题选项变化时更新主题
   useEffect(() => {
@@ -168,6 +148,7 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
           handleExitFullEdit(event)
         }
       }
+      editorInstance.layout()
       window.addEventListener('keyup', handleKeyUp)
       return () => {
         window.removeEventListener('keyup', handleKeyUp)
@@ -283,9 +264,6 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
     }
   }, [monacoEditor])
 
-  useEffect(() => {
-    
-  }, [decorations, value]);
   return (
     <div
       ref={containerRef}

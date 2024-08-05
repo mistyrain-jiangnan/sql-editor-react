@@ -1,11 +1,9 @@
 import * as monaco from "monaco-editor";
 import { editor } from "monaco-editor";
 import { ReactNode } from "react";
-import { type ParseError} from 'dt-sql-parser';
 
 export type IMonacoEditor = typeof monaco;
 
-export type sqlTypeError = ParseError
 
 
 // 引用实例的类型定义
