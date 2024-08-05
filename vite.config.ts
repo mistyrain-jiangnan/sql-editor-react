@@ -12,7 +12,7 @@ const packageJson = JSON.parse(
 );
 
 // 不需要被打包的包的黑名单
-const blacklist: string[] = [];
+const blacklist: string[] = ['dt-sql-parser'];
 const globals = Object.keys(packageJson.dependencies)
   .filter(key => !blacklist.includes(key))
   .reduce<Record<string, string>>((obj, key) => {
@@ -38,6 +38,7 @@ if (process.env.NODE_ENV !== 'development') {
         localeData: zh_hans,
     }))
 }
+console.log(...Object.keys(globals));
 export default defineConfig({
   build: {
     outDir: "dist",
@@ -59,9 +60,8 @@ export default defineConfig({
         },
          exports: 'named',
         manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            // 将所有 node_modules 模块打包到一个 chunk 中
-            return "vendor";
+          if (id.includes("node_modules/dt-sql-parser")) {
+            return "dt-sql-parser";
           }
         },
         format: "cjs",
