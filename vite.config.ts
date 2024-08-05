@@ -5,20 +5,32 @@ import { readFileSync } from "fs";
 
 import React from "@vitejs/plugin-react";
 import dts from 'vite-plugin-dts';
+import { visualizer } from "rollup-plugin-visualizer";
 
 const packageJson = JSON.parse(
   readFileSync("./package.json", { encoding: "utf-8" })
 );
-const globals = {
-  ...(packageJson?.dependencies || {}),
-};
+
+// 不需要被打包的包的黑名单
+const blacklist: string[] = [];
+const globals = Object.keys(packageJson.dependencies)
+  .filter(key => !blacklist.includes(key))
+  .reduce<Record<string, string>>((obj, key) => {
+    obj[key] = packageJson.dependencies[key];
+    return obj;
+  }, {});
+
 //@ts-ignore
 import nlsPlugin, { Languages,esbuildPluginMonacoEditorNls } from './vite-plugins/nls.js'
 
 import zh_hans from './vite-plugins/zh-hans.json'
 
-const plugins = [React(),dts({insertTypesEntry: true})]
-
+const plugins = [React(),dts({insertTypesEntry: true}),visualizer({
+        gzipSize: true,
+        brotliSize: true,
+        emitFile: false,
+      })
+]
 // 注意只在生产环境下添加rollup插件，开发模式下会报错
 if (process.env.NODE_ENV !== 'development') {
     plugins.push(nlsPlugin({
@@ -26,7 +38,6 @@ if (process.env.NODE_ENV !== 'development') {
         localeData: zh_hans,
     }))
 }
-
 export default defineConfig({
   build: {
     outDir: "dist",
@@ -38,12 +49,13 @@ export default defineConfig({
       fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.cjs')
     },
     rollupOptions: {
-      external: ["react", "react-dom",...Object.keys(globals)],
+      external: [...Object.keys(globals)],
       output: {
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "monaco-editor": "monaco-editor",
         },
          exports: 'named',
         manualChunks: (id) => {
