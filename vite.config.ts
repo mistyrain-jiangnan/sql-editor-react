@@ -5,14 +5,13 @@ import { readFileSync } from "fs";
 
 import React from "@vitejs/plugin-react";
 import dts from 'vite-plugin-dts';
-import { visualizer } from "rollup-plugin-visualizer";
 
 const packageJson = JSON.parse(
   readFileSync("./package.json", { encoding: "utf-8" })
 );
 
 // 不需要被打包的包的黑名单
-const blacklist: string[] = ['dt-sql-parser'];
+const blacklist: string[] = [];
 const globals = Object.keys(packageJson.dependencies)
   .filter(key => !blacklist.includes(key))
   .reduce<Record<string, string>>((obj, key) => {
@@ -25,12 +24,8 @@ import nlsPlugin, { Languages,esbuildPluginMonacoEditorNls } from './vite-plugin
 
 import zh_hans from './vite-plugins/zh-hans.json'
 
-const plugins = [React(),dts({insertTypesEntry: true}),visualizer({
-        gzipSize: true,
-        brotliSize: true,
-        emitFile: false,
-      })
-]
+const plugins = [React(),dts({insertTypesEntry: true})]
+
 // 注意只在生产环境下添加rollup插件，开发模式下会报错
 if (process.env.NODE_ENV !== 'development') {
     plugins.push(nlsPlugin({
@@ -38,7 +33,6 @@ if (process.env.NODE_ENV !== 'development') {
         localeData: zh_hans,
     }))
 }
-console.log(...Object.keys(globals));
 export default defineConfig({
   build: {
     outDir: "dist",
@@ -60,13 +54,15 @@ export default defineConfig({
         },
          exports: 'named',
         manualChunks: (id) => {
-          if (id.includes("node_modules/dt-sql-parser")) {
-            return "dt-sql-parser";
+          if (id.includes("node_modules")) {
+            // 将所有 node_modules 模块打包到一个 chunk 中
+            return "vendor";
           }
         },
         format: "cjs",
       },
     },
+   minify: 'terser',
   },
    plugins,
    optimizeDeps: {

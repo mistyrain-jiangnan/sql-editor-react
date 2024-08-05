@@ -129,6 +129,7 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
 
   // 当 value 变化时更新状态
   useEffect(() => {
+    setVal(value)
     if ($editor.current) {
       const editorInstance = $editor.current;
       const handleModelChange = () => {
@@ -148,7 +149,6 @@ function MonacoEditor(props: MonacoEditorProps, ref: React.ForwardedRef<RefEdito
     }else {
       return undefined
     }
-    setVal(value)
   }, [decorations, value])
 
   // 当 val 变化时更新编辑器内容  当主题选项变化时更新主题

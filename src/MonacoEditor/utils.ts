@@ -1,6 +1,6 @@
 import * as monaco from 'monaco-editor'
 
-import { MySQL, ParseError } from 'dt-sql-parser';
+import { MySQL, type ParseError } from 'dt-sql-parser';
 
 import type { languages } from 'monaco-editor'
 
