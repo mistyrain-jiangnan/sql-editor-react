@@ -5,13 +5,14 @@ import { readFileSync } from "fs";
 
 import React from "@vitejs/plugin-react";
 import dts from 'vite-plugin-dts';
+import commonjs from '@rollup/plugin-commonjs';
 
 const packageJson = JSON.parse(
   readFileSync("./package.json", { encoding: "utf-8" })
 );
 
 // 不需要被打包的包的黑名单
-const blacklist: string[] = [];
+const blacklist: string[] = ['dt-sql-parser'];
 const globals = Object.keys(packageJson.dependencies)
   .filter(key => !blacklist.includes(key))
   .reduce<Record<string, string>>((obj, key) => {
@@ -24,7 +25,7 @@ import nlsPlugin, { Languages,esbuildPluginMonacoEditorNls } from './vite-plugin
 
 import zh_hans from './vite-plugins/zh-hans.json'
 
-const plugins = [React(),dts({insertTypesEntry: true})]
+const plugins = [React(),dts({insertTypesEntry: true}),commonjs()]
 
 // 注意只在生产环境下添加rollup插件，开发模式下会报错
 if (process.env.NODE_ENV !== 'development') {
@@ -59,10 +60,9 @@ export default defineConfig({
             return "vendor";
           }
         },
-        format: "cjs",
+        format: "umd",
       },
     },
-   minify: 'terser',
   },
    plugins,
    optimizeDeps: {
