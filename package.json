@@ -33,10 +33,12 @@
   "description": "基于monaco-editor react 实现的sql编辑器，支持语法高亮、 关联数据库,表名 关键字 功能",
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
+    "dt-sql-parser": "^4.0.2",
     "monaco-editor": "^0.50.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sql-formatter": "^15.3.2"
+    "sql-formatter": "^15.3.2",
+    "sql-parser": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.2",
@@ -48,10 +50,10 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "magic-string": "^0.30.11",
     "typescript": "^5.5.4",
     "vite": "^5.3.4",
-    "vite-plugin-dts": "4.0.0-beta.2",
-    "magic-string": "^0.30.11"
+    "vite-plugin-dts": "4.0.0-beta.2"
   },
   "peerDependencies": {
     "monaco-editor": ">= 0.25.0 < 1"
