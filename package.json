@@ -22,6 +22,10 @@
     "preview": "vite preview",
     "clear": "sh ./scripts/clear.sh"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mistyrain-jiangnan/sql-editor-react.git"
+  },
   "keywords": [
     "sql",
     "editor",
@@ -60,5 +64,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "author":"江南"
 }
