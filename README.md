@@ -18,7 +18,7 @@ yarn add sql-editor-react
 ```javascript
 import { useRef, useState, type FC } from "react";
 
-import  MonacoEditor from 'sql-editor-react'
+import  {MonacoEditor} from 'sql-editor-react'
 
 import  {RefEditorInstance} from  'sql-editor-react/types'
 

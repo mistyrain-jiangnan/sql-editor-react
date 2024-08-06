@@ -1,10 +1,11 @@
-import * as monaco from 'monaco-editor'
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 
 // import { MySQL, type ParseError } from 'dt-sql-parser';
 
-import type { languages } from 'monaco-editor'
+import type { languages } from "monaco-editor/esm/vs/editor/editor.api";
 
 import { language as sqlLanguage } from 'monaco-editor/esm/vs/basic-languages/sql/sql.js'
+
 import { format } from 'sql-formatter'
 
 const { keywords } = sqlLanguage
@@ -48,6 +49,12 @@ export const getTableSuggest = (hintData: Record<string, string[]>, dbName: stri
 // 格式化 SQL
 export const formatSQL = (sql: string): string => {
   return format(sql)
+}
+// 初始化 函数
+export function noop() {}
+
+export function processSize(size: number | string) {
+  return /^\d+$/.test(size as string) ? `${size}px` : size;
 }
 // /**
 // **

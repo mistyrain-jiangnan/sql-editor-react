@@ -1,6 +1,11 @@
-import { default as MonacoEditor } from './MonacoEditor/index'
+import { default as Editor } from './Editor/index'
+import { default as DiffEditor } from './DiffEditor/index';
 
-export * from './MonacoEditor/types';
+export * from './types';
+
+export * from './themo'
 // 具名导出：
-export { MonacoEditor };
-export default MonacoEditor;
+export { DiffEditor,Editor };
+
+
+

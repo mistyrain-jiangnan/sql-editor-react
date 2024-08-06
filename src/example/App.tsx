@@ -1,45 +1,43 @@
-import { useRef, useState } from 'react'
-import type { RefEditorInstance } from '../MonacoEditor/types'
-import type { editor } from 'monaco-editor'
-import type { FC } from 'react'
+import {  useState } from "react";
 
-import MonacoEditor from '../MonacoEditor/MonacoEditor'
-import React from 'react'
+import type { FC } from "react";
+
+
+import DiffEditor from "../DiffEditor/index";
+
+import React from "react";
 
 const App: FC = () => {
-  const editorRef = useRef<RefEditorInstance>(null)
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [code, setCode] = useState('SELECT * FROM users;')
-  const options: editor.IStandaloneEditorConstructionOptions & editor.IEditorScrollbarOptions = {
-    selectOnLineNumbers: true,
-    roundedSelection: false,
-    cursorStyle: 'line',
-    automaticLayout: true,
-  }
-  const handleEditorChange = (newValue: string) => {
-    setCode(newValue)
-  }
-  const editorDidMount = (editor: editor.IStandaloneCodeEditor) => {
-    editor.focus()
-  }
-  const handleFormatSQL = () => {
-    if (editorRef.current) {
-      editorRef.current.format() // 调用暴露的 formatSQL 方法
-    }
-  }
+
+  const [original] = useState("This is the original text.");
+  const [modified] = useState("This is the modified text.");
+  
+
+
+  const handleChange = (newValue) => {
+    console.log("Content changed:", newValue);
+    // 处理内容变化事件
+  };
   return (
     <>
-      <button onClick={handleFormatSQL}>格式化 SQL</button> {/* 按钮触发格式化 */}
-      <MonacoEditor
-        ref={editorRef}
-        height={400}
-        value={code}
-        theme="naruto"
-        options={options}
-        editorDidMount={(editor) => editorDidMount(editor)}
-        onChange={handleEditorChange}
+      <div style={{ height: "600px"}}>
+      <DiffEditor
+        width="1000"
+        height="100%"
+        original={original}
+        value={modified}
+        language="sql" // 可以根据需要设置语言
+        theme="naruto" // 可以设置主题
+        onChange={handleChange}
+        editorDidMount={(editor, monaco) => {
+          console.log("Editor mounted", editor, monaco);
+        }}
+        editorWillUnmount={(editor, monaco) => {
+          console.log("Editor will unmount", editor, monaco);
+        }}
       />
+    </div>
     </>
-  )
-}
-export default App
+  );
+};
+export default App;

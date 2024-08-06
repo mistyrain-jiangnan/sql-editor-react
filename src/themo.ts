@@ -1,6 +1,6 @@
-import * as monaco from 'monaco-editor'
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 
-export const defineTheme = () => {
+export const narutoTheme = () => {
   monaco.editor.defineTheme('naruto', {
     base: 'vs', // 以哪个默认主题为基础："vs" | "vs-dark" | "hc-black" | "hc-light"
     inherit: true,

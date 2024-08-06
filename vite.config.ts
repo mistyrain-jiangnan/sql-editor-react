@@ -11,10 +11,10 @@ const packageJson = JSON.parse(
   readFileSync("./package.json", { encoding: "utf-8" })
 );
 
-// 不需要被打包的包的黑名单
-const blacklist: string[] = ['dt-sql-parser'];
+// 不需要被打包的包的白名单
+const whitelist: string[] = [];
 const globals = Object.keys(packageJson.dependencies)
-  .filter(key => !blacklist.includes(key))
+  .filter(key => !whitelist.includes(key))
   .reduce<Record<string, string>>((obj, key) => {
     obj[key] = packageJson.dependencies[key];
     return obj;
