@@ -30,7 +30,7 @@ export type ChangeHandler = (
 // 引用实例的类型定义
 export interface RefEditorInstance {
   container: HTMLDivElement | null;
-  editor?: editor.IStandaloneCodeEditor;
+  editor?: monacoEditor.editor.IStandaloneCodeEditor;
   monaco: IMonacoEditor;
   format: () => void; // 暴露 formatSQL 方法
   setReadOnly: (value: boolean) => void;
