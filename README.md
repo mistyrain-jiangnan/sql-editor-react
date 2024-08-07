@@ -18,7 +18,7 @@ yarn add sql-editor-react
 ```javascript
 import { useRef, useState, type FC } from "react";
 
-import  {MonacoEditor} from 'sql-editor-react'
+import  {Editor} from 'sql-editor-react'
 
 import  {RefEditorInstance} from  'sql-editor-react/types'
 
@@ -29,7 +29,7 @@ const App: FC = () => {
   const [code] = useState("SELECT * FROM users;");
   return (
     <>
-      <MonacoEditor
+      <Editor
         ref={editorRef}
         height={200}
         theme="naruto"
